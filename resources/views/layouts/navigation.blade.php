@@ -15,6 +15,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <label style="margin-top: 23px; margin-left: 330px;">Welcome To Robusta Recruitment Site</label>
                 </div>
             </div>
 
@@ -32,12 +33,17 @@
                             </div>
                         </button>
                     </x-slot>
-
+                    @if(auth() -> user() -> username == 'ahmed123')
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link :href="route('applications.index')">
+                            {{ __('View Requests') }}
                         </x-dropdown-link>
-
+                    @else 
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('application.create')">
+                            {{ __('Apply Now!') }}
+                        </x-dropdown-link>
+                    @endif
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
